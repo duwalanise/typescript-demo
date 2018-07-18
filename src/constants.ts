@@ -12,13 +12,13 @@ export const groupList = (onClickHandler: any) =>  [
           {
             key: 'key1',
             name: 'Project 1',
-            onClick: () => onClickHandler('Project 1'),
+            onClick: () => onClickHandler('Project1'),
             url: '',
           },
           {
             key: 'key2',
             name: 'Project 2',
-            onClick: () => onClickHandler('Project 2'),
+            onClick: () => onClickHandler('Project2'),
             url: '',
           }
         ],
@@ -31,13 +31,13 @@ export const groupList = (onClickHandler: any) =>  [
           {
             key: 'key3',
             name: 'Group 1',
-            onClick: () => onClickHandler('Group 1'),
+            onClick: () => onClickHandler('Group1'),
             url: '',
           },
           {
             key: 'key4',
             name: 'Group 2',
-            onClick: () => onClickHandler('Group 2'),
+            onClick: () => onClickHandler('Group2'),
             url: '',
           }
         ],

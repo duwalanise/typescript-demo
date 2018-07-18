@@ -4,6 +4,33 @@ export const Wrapper = styled.div`
   display: flex;
 `;
 
+export const Body = styled(Wrapper)`
+  flex: 1;
+`;
+
+export const TaskListWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+`;
+
+export const TaskMenu = styled.div`
+  background: green;
+`;
+
+export const TableWrapper = styled.div`
+  flex: 1;
+`;
+
+
+export const TaskDetailsWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  background: #efefef;
+  overflow-x: hidden;
+`;
+
 export const Sidebar = styled.div`
   width: 200px;
   height: 100vh;
@@ -18,7 +45,9 @@ export const Sidebar = styled.div`
   }
 `;
 
-export const Body = styled.div`
+export const NoTaskWrapper = styled.div`
   flex: 1;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

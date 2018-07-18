@@ -1,34 +1,78 @@
-import * as React from 'react';
+import {observer} from 'mobx-react';
 import {
-  ComboBox,
+  // ComboBox,
   Nav,
 } from 'office-ui-fabric-react';
+import * as React from 'react';
 import {
   compose,
   withHandlers,
-  withState,
+  withProps,
 } from 'recompose';
 
 import {
   groupList,
   navStyles,
 } from './constants';
+import Table from './generics/table';
+import taskStore from './store';
 import {
   Body,
+  NoTaskWrapper,
   Sidebar,
+  TableWrapper,
+  TaskDetailsWrapper,
+  TaskListWrapper,
+  TaskMenu,
   Wrapper,
 } from './styled';
 
 interface IProps {
-  onClick: () => void,
-  selectedTask: string,
-  updateSelected: (value: string) => void,
+  onMenuSelect: () => void,
+  onRowSelect: () => void,
+  taskStore: {
+    selectedTask:  any,
+    setSelectedMenu: (value: string) => void,
+    setSelectedTask: (item: object) => void,
+    taskList: object[],
+  },
 }
 
-const App = (props: IProps ) => (
+const Columns = [
+  {
+    fieldName: 'id',
+    key: 'column1',
+    maxWidth: 100,
+    minWidth: 50,
+    name: 'ID'
+  },
+  {
+    fieldName: 'title',
+    key: 'column2',
+    maxWidth: 200,
+    minWidth: 100,
+    name: 'Title'
+  },
+  {
+    fieldName: 'state',
+    key: 'column3',
+    maxWidth: 200,
+    minWidth: 100,
+    name: 'State'
+  },
+  {
+    fieldName: 'createdAt',
+    key: 'column4',
+    maxWidth: 200,
+    minWidth: 100,
+    name: 'Created At'
+  },
+];
+
+const App = observer((props: IProps ) => (
   <Wrapper>
     <Sidebar>
-      <ComboBox
+      {/* <ComboBox
         id='Basicdrop1'
         ariaLabel='Basic ComboBox example'
         allowFreeform={ true }
@@ -40,21 +84,43 @@ const App = (props: IProps ) => (
             { key: 'C', text: 'Option c' },
           ]
         }
-      />
+      /> */}
       <Nav
-        groups={groupList(props.onClick)}
+        groups={groupList(props.onMenuSelect)}
         expandedStateText={'expanded'}
         collapsedStateText={'collapsed'}
         styles={navStyles}
       />
     </Sidebar>
-    <Body>{props.selectedTask}</Body>
+    <Body>
+      <TaskListWrapper>
+        <TaskMenu>Hello</TaskMenu>
+        {
+          props.taskStore.taskList ? (
+            <TableWrapper>
+              <Table items={props.taskStore.taskList} columns={Columns} onRowSelect={props.onRowSelect} />
+            </TableWrapper>
+          ) :
+          <NoTaskWrapper> No Task List </NoTaskWrapper>
+        }
+      </TaskListWrapper>
+      <TaskDetailsWrapper>
+        {
+          props.taskStore.selectedTask ?
+          <>{JSON.stringify(props.taskStore.selectedTask)}</> :
+          <NoTaskWrapper>No Task Selected</NoTaskWrapper>
+        }
+      </TaskDetailsWrapper>
+    </Body>
   </Wrapper>
-);
+));
 
 export default compose<IProps, {}>(
-  withState('selectedTask', 'updateSelected', ''),
+  withProps({
+    taskStore,
+  }),
   withHandlers({
-    onClick: (props: IProps) => (value: string) => props.updateSelected(value)
+    onMenuSelect: (props: IProps) => (value: string) => props.taskStore.setSelectedMenu(value),
+    onRowSelect: (props: IProps) => (item: object) => props.taskStore.setSelectedTask(item),
   }),
 )(App);
