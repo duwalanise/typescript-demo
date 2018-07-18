@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/prop-types": "^15.5.3",
+    "@uifabric/icons": "^6.0.2",
     "office-ui-fabric-react": "^6.37.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

@@ -4,12 +4,18 @@ import {
 } from 'office-ui-fabric-react';
 import * as React from 'react';
 
-import { groupList, navStyles } from './constants';
+import {
+  groupList,
+  navStyles,
+} from './constants';
 import {
   Body,
   Sidebar,
   Wrapper,
 } from './styled';
+
+// tslint:disable-next-line:no-console
+const onClick = (value: string) => console.log(value);
 
 const App = () => (
   <Wrapper>
@@ -28,10 +34,9 @@ const App = () => (
         }
       />
       <Nav
-        groups={groupList}
+        groups={groupList(onClick)}
         expandedStateText={'expanded'}
         collapsedStateText={'collapsed'}
-        selectedKey={'key1'}
         styles={navStyles}
       />
     </Sidebar>
