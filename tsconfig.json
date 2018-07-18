@@ -23,7 +23,8 @@
     "emitDecoratorMetadata": true,
     "preserveConstEnums": true,
     "types": [
-      "jest"
+      "jest",
+      "node"
     ],
     "esModuleInterop": true
   },

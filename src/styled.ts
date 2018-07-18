@@ -20,4 +20,5 @@ export const Sidebar = styled.div`
 
 export const Body = styled.div`
   flex: 1;
+  padding: 20px;
 `;

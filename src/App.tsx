@@ -1,8 +1,13 @@
+import * as React from 'react';
 import {
   ComboBox,
   Nav,
 } from 'office-ui-fabric-react';
-import * as React from 'react';
+import {
+  compose,
+  withHandlers,
+  withState,
+} from 'recompose';
 
 import {
   groupList,
@@ -14,10 +19,13 @@ import {
   Wrapper,
 } from './styled';
 
-// tslint:disable-next-line:no-console
-const onClick = (value: string) => console.log(value);
+interface IProps {
+  onClick: () => void,
+  selectedTask: string,
+  updateSelected: (value: string) => void,
+}
 
-const App = () => (
+const App = (props: IProps ) => (
   <Wrapper>
     <Sidebar>
       <ComboBox
@@ -34,14 +42,19 @@ const App = () => (
         }
       />
       <Nav
-        groups={groupList(onClick)}
+        groups={groupList(props.onClick)}
         expandedStateText={'expanded'}
         collapsedStateText={'collapsed'}
         styles={navStyles}
       />
     </Sidebar>
-    <Body>Hello</Body>
+    <Body>{props.selectedTask}</Body>
   </Wrapper>
 );
 
-export default App;
+export default compose<IProps, {}>(
+  withState('selectedTask', 'updateSelected', ''),
+  withHandlers({
+    onClick: (props: IProps) => (value: string) => props.updateSelected(value)
+  }),
+)(App);
