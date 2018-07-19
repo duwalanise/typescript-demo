@@ -30,7 +30,6 @@ const TaskForm = (props: IProps) => (
         showWeekNumbers={true}
         firstWeekOfYear={1}
         showMonthPickerAsOverlay={true}
-        borderless={true}
         placeholder="Due Date"
       />
       <SelectAssignee handlePersonChange={props.handlePersonChange}/>

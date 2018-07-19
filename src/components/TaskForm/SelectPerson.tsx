@@ -1,22 +1,23 @@
-import * as React from 'react';
-import 'react-select/dist/react-select.css';
-
 import {
-  StyledSelect
-} from './styled';
-
+  ComboBox
+} from 'office-ui-fabric-react';
+import * as React from 'react';
 const SelectPerson = (props) => (
-  <StyledSelect
-    name="assignee"
-    value={props.selectedPerson}
+  <ComboBox
+    id='Basicdrop1'
+    defaultSelectedKey='D'
+    ariaLabel='Basic ComboBox example'
+    allowFreeform={ false }
     onChange={props.handlePersonChange}
-    options={[
-      { value: 'one', label: 'Person 1' },
-      { value: 'two', label: 'Person 2' },
-      { value: 'three', label: 'Person 3' },
-      { value: 'four', label: 'Person 4' },
-      { value: 'five', label: 'Person 5' },
-    ]}
+    autoComplete='on'
+    options={
+      [
+        { key: 'D', text: 'Select Assignee' },
+        { key: 'A', text: 'Option a' },
+        { key: 'B', text: 'Option b' },
+        { key: 'C', text: 'Option c' },
+      ]
+    }
   />
 );
 

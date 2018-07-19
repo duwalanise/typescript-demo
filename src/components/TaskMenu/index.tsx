@@ -5,6 +5,7 @@ import {
 } from 'office-ui-fabric-react';
 import * as React from 'react';
 import { compose, withHandlers, withState } from 'recompose';
+import TaskForm from '../TaskForm';
 import {
     MenuWrapper,
 } from './styled';
@@ -26,7 +27,9 @@ const TaskMenu = (props) => (
 			closeButtonAriaLabel="Close"
 			// onRenderFooterContent={this._onRenderFooterContent}
 		>
-		Hello
+		<div style={{height: '100%', display: 'flex'}}>
+			<TaskForm />
+		</div>
 		</Panel>
 	</MenuWrapper>
 );

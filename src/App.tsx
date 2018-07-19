@@ -10,6 +10,7 @@ import {
   withProps,
 } from 'recompose';
 
+import DetailsMenu from './components/DetailsMenu';
 import TaskForm from './components/TaskForm';
 import TaskMenu from './components/TaskMenu';
 import {
@@ -108,7 +109,10 @@ const App = observer((props: IProps ) => (
       <TaskDetailsWrapper>
         {
           props.taskStore.selectedTask ?
-          <TaskForm task={props.taskStore.selectedTask} /> :
+          <>
+            <DetailsMenu />
+            <TaskForm task={props.taskStore.selectedTask} />
+          </> :
           <NoTaskWrapper>No Task Selected</NoTaskWrapper>
         }
       </TaskDetailsWrapper>

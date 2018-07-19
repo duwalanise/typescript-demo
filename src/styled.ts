@@ -31,6 +31,7 @@ export const TaskDetailsWrapper = styled.div`
   flex: 1;
   display: flex;
   background: #fff;
+  flex-direction: column;
   overflow-x: hidden;
 `;
 

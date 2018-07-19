@@ -2,7 +2,6 @@ import {
   DatePicker,
   TextField
 } from 'office-ui-fabric-react';
-import Select from 'react-select';
 import styled from 'styled-components';
 
 
@@ -14,7 +13,7 @@ export const FormWrapper = styled.div`
 
 export const FieldWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 10px;
   border-bottom: solid 1px #ccc;
 `;
@@ -35,14 +34,5 @@ export const StyledTextField = styled(TextField)`
 `;
 
 export const StyledDatePicker = styled(DatePicker)`
-  flex: 1;
-  border: solid 1px #ccc;
-  border-radius: 4px;
-  padding: 1px;
-  height: 36px;
   margin-right: 10px;
-`;
-
-export const StyledSelect = styled(Select)`
-  flex: 1;
 `;
