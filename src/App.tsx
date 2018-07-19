@@ -10,6 +10,8 @@ import {
   withProps,
 } from 'recompose';
 
+import TaskForm from './components/TaskForm';
+import TaskMenu from './components/TaskMenu';
 import {
   groupList,
   navStyles,
@@ -23,7 +25,6 @@ import {
   TableWrapper,
   TaskDetailsWrapper,
   TaskListWrapper,
-  TaskMenu,
   Wrapper,
 } from './styled';
 
@@ -94,7 +95,7 @@ const App = observer((props: IProps ) => (
     </Sidebar>
     <Body>
       <TaskListWrapper>
-        <TaskMenu>Hello</TaskMenu>
+        <TaskMenu />
         {
           props.taskStore.taskList ? (
             <TableWrapper>
@@ -107,7 +108,7 @@ const App = observer((props: IProps ) => (
       <TaskDetailsWrapper>
         {
           props.taskStore.selectedTask ?
-          <>{JSON.stringify(props.taskStore.selectedTask)}</> :
+          <TaskForm task={props.taskStore.selectedTask} /> :
           <NoTaskWrapper>No Task Selected</NoTaskWrapper>
         }
       </TaskDetailsWrapper>

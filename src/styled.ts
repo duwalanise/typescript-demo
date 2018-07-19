@@ -6,11 +6,14 @@ export const Wrapper = styled.div`
 
 export const Body = styled(Wrapper)`
   flex: 1;
+  background: #efefef;
 `;
 
 export const TaskListWrapper = styled.div`
   flex: 1;
   display: flex;
+  margin-right: 5px;
+  background: #fff;
   flex-direction: column;
   overflow-x: hidden;
 `;
@@ -27,7 +30,7 @@ export const TableWrapper = styled.div`
 export const TaskDetailsWrapper = styled.div`
   flex: 1;
   display: flex;
-  background: #efefef;
+  background: #fff;
   overflow-x: hidden;
 `;
 
