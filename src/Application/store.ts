@@ -4,10 +4,10 @@ import {
 } from 'mobx';
 
 class MyWorkStore {
-  @observable protected selectedTask: object | null = null;
+  @observable private selectedTask: object | null = null;
   @observable private selectedMenu = '';
 
-  @observable private tasks = {
+  private tasks = {
     'Project1': [
       { id: '1', title: 'P1 Task 1', state: 'New', createdAt: '2018-07-17' },
       { id: '2', title: 'P1 Task 2', state: 'New', createdAt: '2018-07-17' },
@@ -25,6 +25,10 @@ class MyWorkStore {
   @computed public get getTasks() {
     // Api call
     return this.tasks[this.selectedMenu] || null;
+  }
+
+  @computed public get getSelectedTask() {
+    return this.selectedTask;
   }
 
   public setSelectedMenu = (value: string) => {
