@@ -6,6 +6,7 @@ import {
   TableWrapper,
   TaskListWrapper,
 } from './styled';
+import TaskMenu from './TaskMenu';
 
 const Columns = [
   {
@@ -30,11 +31,11 @@ const Columns = [
     name: 'State'
   },
   {
-    fieldName: 'createdAt',
+    fieldName: 'dueDate',
     key: 'column4',
     maxWidth: 200,
     minWidth: 100,
-    name: 'Created At'
+    name: 'Due Date'
   },
 ];
 
@@ -46,7 +47,7 @@ interface IProps {
 
 const TaskList = (props: IProps) => (
   <TaskListWrapper>
-  {/* <TaskMenu /> */}
+  <TaskMenu />
   {
     props.tasks ? (
       <TableWrapper>

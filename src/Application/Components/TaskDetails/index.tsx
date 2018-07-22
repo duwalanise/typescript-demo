@@ -10,15 +10,24 @@ import {
 import TaskForm from './TaskForm';
 
 interface IProps {
-  task: object | null,
+  onTaskEdit: () => void
 }
 
-const TaskDetails = observer(({myWorkStore}) => (
+// tslint:disable-next-line:no-console
+const errorHandler = (err) => console.log(err);
+
+const TaskDetails = observer(({myWorkStore, onTaskEdit}) => (
   <TaskDetailsWrapper>
     {/* <DetailsMenu /> */}
     {
       !!myWorkStore.getSelectedTask ?
-        <TaskForm task={myWorkStore.getSelectedTask} /> :
+        <TaskForm
+          task={myWorkStore.getSelectedTask}
+          callback={{
+            error: errorHandler,
+            success: onTaskEdit,
+          }}
+        /> :
         <NoTaskWrapper>No Task Selected</NoTaskWrapper>
     }
   </TaskDetailsWrapper>
@@ -29,6 +38,6 @@ export default compose<IProps, {}>(
     myWorkStore: store,
   }),
   withHandlers({
-    onTaskEdit: ({ myWorkStore }) => (item: object, project: string) => myWorkStore.addTask(item, project),
+    onTaskEdit: ({ myWorkStore }) => (item: object, project: string) => myWorkStore.editTask(item, (myWorkStore.getSelectedMenu || project)),
   }),
 )(TaskDetails);

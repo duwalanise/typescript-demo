@@ -1,14 +1,18 @@
 import {
   CommandBar,
   ICommandBarItemProps,
-  // TextField,
 } from 'office-ui-fabric-react';
 import * as React from 'react';
 
-import form from '../form';
-import SimpleInput from '../simpleInput';
+import {
+  ComboBoxField,
+  DatePickerField,
+  TextInputField,
+} from 'src/Application/Components/Generics/Fields';
+import createForm from './form';
+import { FieldWrapper, FormWrapper } from './styled';
 
-const commandBarItems = () => [
+const commandBarItems = (form) => [
   {
     iconProps: {
       iconName: 'Save',
@@ -25,29 +29,61 @@ const commandBarItems = () => [
       iconName: 'Undo',
     },
     key: 'Undo',
-    name: 'Undo',
+    name: 'Clear',
     onClick: form.onClear,
-    title: 'Undo Changes',
+    title: 'Clear Changes',
   },
 ] as ICommandBarItemProps[];
 
+// For custom onChange Handler pass handler function to onChange props
 function handleChange(field, evt) {
-  // tslint:disable-next-line:no-console
-  console.log(evt);
-  // tslint:disable-next-line:no-debugger
   field.set('value', evt);
+  // For dynamic validation
+  // if (evt) {
+  //   form.$('password').set('rules', 'required');
+  // } else {
+  //   form.$('password').set('rules', '');
+  // }
 }
 
 const TaskForm = (props) => {
-  form.$('password').set('rules', 'required');
+  const form = createForm(props.task, props.callback);
   return (
   <>
     <CommandBar
-      items={commandBarItems()}
+      items={commandBarItems(form)}
       ariaLabel={'Use left and right arrow keys to navigate between commands'}
     />
-    <SimpleInput field={form.$('email')} onChange={handleChange.bind(null, form.$('email'))} />
-    <SimpleInput field={form.$('password')} />
+    <FormWrapper>
+      <TextInputField
+        field={form.$('title')}
+        onChange={handleChange.bind(null, form.$('title'))} />
+      <FieldWrapper>
+        <DatePickerField
+          field={form.$('dueDate')}
+        />
+        <ComboBoxField
+          field={form.$('assignee')}
+          id='Basicdrop1'
+          ariaLabel='Basic ComboBox example'
+          allowFreeform={ false }
+          autoComplete='on'
+          options={
+            [
+              { key: 'D', text: 'Select Assignee' },
+              { key: 'A', text: 'Option a' },
+              { key: 'B', text: 'Option b' },
+              { key: 'C', text: 'Option c' },
+            ]
+          }
+        />
+      </FieldWrapper>
+      <TextInputField
+        field={form.$('description')}
+        multiline={true}
+        rows={6}
+      />
+    </FormWrapper>
   </>
 )};
 
