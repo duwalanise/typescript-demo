@@ -42,7 +42,6 @@ const Columns = [
 interface IProps {
   tasks: object[],
   onRowSelect: () => void,
-  onTaskAdd: () => void,
 }
 
 const TaskList = (props: IProps) => (

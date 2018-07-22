@@ -5,8 +5,17 @@ import {
 	PanelType,
 } from 'office-ui-fabric-react';
 import * as React from 'react';
-import { compose, withHandlers, withState } from 'recompose';
+import { compose, withHandlers, withProps, withState } from 'recompose';
+import store from 'src/Application/store';
 import TaskForm from '../../TaskDetails/TaskForm';
+
+
+interface IProps {
+  showPanel: boolean | undefined,
+  onPanelClose: () => void,
+  onPanelOpen: () => void,
+  onTaskAdd: (item: object, project: string) => void,
+}
 
 const commandBarItems = (props) => [
   {
@@ -23,7 +32,7 @@ const commandBarItems = (props) => [
 // tslint:disable-next-line:no-console
 const errorHandler = (err) => console.log(err);
 
-const TaskMenu = (props) => (
+const TaskMenu = (props: IProps) => (
 	<div>
     <CommandBar
       items={commandBarItems(props)}
@@ -42,7 +51,7 @@ const TaskMenu = (props) => (
         task={{}}
         callback={{
           error: errorHandler,
-          success: errorHandler,
+          success: props.onTaskAdd,
         }}
       />
 		</div>
@@ -50,10 +59,15 @@ const TaskMenu = (props) => (
 	</div>
 );
 
-export default compose(
-	withState('showPanel', 'togglePanel', false),
+export default compose<IProps, {}>(
+  withState('showPanel', 'togglePanel', false),
+  withProps({
+    myWorkStore: store,
+  }),
 	withHandlers({
 		onPanelClose: (props: any) => () => props.togglePanel(false),
-		onPanelOpen: (props: any) => () => props.togglePanel(true),
+    onPanelOpen: (props: any) => () => props.togglePanel(true),
+    onTaskAdd: ({ myWorkStore }) => (item: object, project: string) => myWorkStore.addTask(item, project),
+
 	})
 )(TaskMenu);

@@ -44,6 +44,11 @@ class MyWorkStore {
     this.selectedTask = task;
   }
 
+  public addTask = (item, project ) => {
+    // tslint:disable-next-line:no-console
+    console.log(item, project);
+  }
+
   public editTask = (item, project ) => {
     // tslint:disable-next-line:no-console
     console.log(item, project);

@@ -30,7 +30,6 @@ const MyWork = observer(({
   onMenuSelect,
   onRowSelect,
   onTaskAdd,
-  // selectedTask,
 }: IProps) => (
   <Wrapper>
     <Sidebar
@@ -39,7 +38,6 @@ const MyWork = observer(({
     <TaskList
       tasks={myWorkStore.getTasks}
       onRowSelect={onRowSelect}
-      onTaskAdd={onTaskAdd}
     />
     <TaskDetails />
   </Wrapper>
@@ -52,6 +50,5 @@ export default compose<IProps, {}>(
   withHandlers({
     onMenuSelect: ({ myWorkStore }) => (value: string) => myWorkStore.setSelectedMenu(value),
     onRowSelect: ({ myWorkStore }) => (item: object) => myWorkStore.setSelectedTask(item),
-    onTaskAdd: ({ myWorkStore }) => (item: object, project: string) => myWorkStore.addTask(item, project),
   }),
 )(MyWork);
