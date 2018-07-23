@@ -13,7 +13,7 @@ const getField =  (task) => [{
   label: ' ',
   name: 'dueDate',
   placeholder: 'Due Date',
-  value: new Date(task.dueDate),
+  value: task.dueDate ? new Date(task.dueDate) : null,
 }, {
   label: ' ',
   name: 'assignee',
