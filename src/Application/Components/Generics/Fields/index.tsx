@@ -42,7 +42,7 @@ export const ComboBoxField = observer(({ field, type = 'text', placeholder = nul
   <div>
     <ComboBox
       onChanged={onChange || field.onChange}
-      text={field.value ? field.value.text : null}
+      text={field.value ? field.value.text : field.placeholder}
       {...field.bind({
         placeholder,
         type,

@@ -8,7 +8,7 @@ import {
   ComboBoxField,
   DatePickerField,
   TextInputField,
-} from 'src/Application/Components/Generics/Fields';
+} from '../../Generics/Fields';
 import createForm from './form';
 import { FieldWrapper, FormWrapper } from './styled';
 
@@ -36,7 +36,7 @@ const commandBarItems = (form) => [
 ] as ICommandBarItemProps[];
 
 // For custom onChange Handler pass handler function to onChange props
-function handleChange(field, evt) {
+function handleChange(field: any, evt: object|string) {
   field.set('value', evt);
   // For dynamic validation
   // if (evt) {
@@ -55,6 +55,22 @@ const TaskForm = (props) => {
       ariaLabel={'Use left and right arrow keys to navigate between commands'}
     />
     <FormWrapper>
+      { !props.project &&
+      <ComboBoxField
+        field={form.$('project')}
+        id='Basicdrop1'
+        ariaLabel='Basic ComboBox example'
+        allowFreeform={ false }
+        autoComplete='on'
+        options={
+          [
+            { key: 'D', text: 'Select Project' },
+            { key: 'A', text: 'Project a' },
+            { key: 'B', text: 'Project b' },
+            { key: 'C', text: 'Project c' },
+          ]
+        }
+      /> }
       <TextInputField
         field={form.$('title')}
         onChange={handleChange.bind(null, form.$('title'))} />

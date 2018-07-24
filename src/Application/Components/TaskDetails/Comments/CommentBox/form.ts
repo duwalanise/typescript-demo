@@ -3,32 +3,10 @@ import validatorjs from 'validatorjs';
 
 const plugins = { dvr: validatorjs };
 
-const getField =  (task) => [{
+const getField =  () => [{
   label: ' ',
-  name: 'project',
-  placeholder: 'Select Project',
-  value: task.project,
-}, {
-  label: ' ',
-  name: 'title',
-  placeholder: 'Write your task name',
-  rules: 'required',
-  value: task.title,
-}, {
-  label: ' ',
-  name: 'dueDate',
-  placeholder: 'Due Date',
-  value: task.dueDate ? new Date(task.dueDate) : null,
-}, {
-  label: ' ',
-  name: 'assignee',
-  placeholder: 'Select Assignee',
-  value: task.assignee,
-}, {
-  label: ' ',
-  name: 'description',
-  placeholder: 'Add description to your task',
-  value: task.description
+  name: 'comment',
+  placeholder: 'Write a comment...',
 }];
 
 const getHooks = (callback) => ({
@@ -48,8 +26,8 @@ const getHooks = (callback) => ({
   }
 });
 
-const createForm = (task, callback) => {
-  const fields = getField(task);
+const createForm = (callback) => {
+  const fields = getField();
   const hooks = getHooks(callback);
   return new MobxReactForm({ fields }, { plugins, hooks });
 }

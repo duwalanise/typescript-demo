@@ -6,7 +6,7 @@ import {
 } from 'office-ui-fabric-react';
 import * as React from 'react';
 import { compose, withHandlers, withProps, withState } from 'recompose';
-import store from 'src/Application/store';
+import store from '../../../store';
 import TaskForm from '../../TaskDetails/TaskForm';
 
 
@@ -67,7 +67,7 @@ export default compose<IProps, {}>(
 	withHandlers({
 		onPanelClose: (props: any) => () => props.togglePanel(false),
     onPanelOpen: (props: any) => () => props.togglePanel(true),
-    onTaskAdd: ({ myWorkStore }) => (item: object, project: string) => myWorkStore.addTask(item, project),
+    onTaskAdd: ({ myWorkStore }) => (item: object) => myWorkStore.addTask(item),
 
 	})
 )(TaskMenu);

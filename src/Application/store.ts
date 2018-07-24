@@ -1,4 +1,5 @@
 import {
+  action,
   computed,
   observable
 } from 'mobx';
@@ -36,22 +37,22 @@ class MyWorkStore {
     return this.selectedTask;
   }
 
-  public setSelectedMenu = (value: string) => {
+  @action public setSelectedMenu = (value: string) => {
     this.selectedMenu = value;
   }
 
-  public setSelectedTask = (task: object) => {
+  @action public setSelectedTask = (task: object) => {
     this.selectedTask = task;
   }
 
-  public addTask = (item, project ) => {
+  @action public addTask = (item ) => {
     // tslint:disable-next-line:no-console
-    console.log(item, project);
+    console.log(item);
   }
 
-  public editTask = (item, project ) => {
+  @action public editTask = (item ) => {
     // tslint:disable-next-line:no-console
-    console.log(item, project);
+    console.log(item);
   }
 
 }

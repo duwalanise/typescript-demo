@@ -3,6 +3,7 @@ import * as React from 'react';
 import { compose, withHandlers, withProps } from 'recompose';
 
 import store from '../../store';
+import Comments from './Comments';
 import {
   NoTaskWrapper,
   TaskDetailsWrapper,
@@ -21,13 +22,17 @@ const TaskDetails = observer(({myWorkStore, onTaskEdit}) => (
     {/* <DetailsMenu /> */}
     {
       !!myWorkStore.getSelectedTask ?
-        <TaskForm
-          task={myWorkStore.getSelectedTask}
-          callback={{
-            error: errorHandler,
-            success: onTaskEdit,
-          }}
-        /> :
+        <>
+          <TaskForm
+            task={myWorkStore.getSelectedTask}
+            project={myWorkStore.getSelectedMenu}
+            callback={{
+              error: errorHandler,
+              success: onTaskEdit,
+            }}
+          />
+          <Comments />
+        </> :
         <NoTaskWrapper>No Task Selected</NoTaskWrapper>
     }
   </TaskDetailsWrapper>
@@ -38,6 +43,6 @@ export default compose<IProps, {}>(
     myWorkStore: store,
   }),
   withHandlers({
-    onTaskEdit: ({ myWorkStore }) => (item: object, project: string) => myWorkStore.editTask(item, (myWorkStore.getSelectedMenu || project)),
+    onTaskEdit: ({ myWorkStore }) => (item: object) => myWorkStore.editTask(item),
   }),
 )(TaskDetails);
